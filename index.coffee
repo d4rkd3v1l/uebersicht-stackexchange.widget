@@ -1,7 +1,7 @@
 # copyright d4Rk
 
 command: 'stackexchange.widget/commands.sh'
-refreshFrequency: 300000
+refreshFrequency: 300000 # dont set this too low, as there is a quota on requesting updates
 
 update: (output, domEl) ->
   # console.log output
@@ -11,7 +11,9 @@ update: (output, domEl) ->
 
   # ME
   me = data.me.items[0];
-  $domEl.append("<div><span class='name'>me</span> <a href='#{me.link}'>#{me.display_name}</a></div>")
+  inboxUnread = data.inboxUnread.items;
+  notificationsUnread = data.notificationsUnread.items;
+  $domEl.append("<div><span class='name'>me</span> <a href='#{me.link}'>#{me.display_name}</a> (i:#{inboxUnread.length}) (n:#{notificationsUnread.length})</div>")
   $domEl.append("<div><span class='name'>reputation</span> #{me.reputation} (d:#{me.reputation_change_day}, w:#{me.reputation_change_week}, m:#{me.reputation_change_month}, q:#{me.reputation_change_quarter}, y:#{me.reputation_change_year})</div>")
   $domEl.append("<div><span class='name'>posts</span> q:#{me.question_count}, a:#{me.answer_count}</div>")
   $domEl.append("<div><span class='name'>badges</span> g:#{me.badge_counts.gold}, s:#{me.badge_counts.silver}, b:#{me.badge_counts.bronze}</div>")
@@ -56,7 +58,7 @@ renderItem: (item) ->
 
 style: """
   right 0%
-  bottom 0%
+  bottom 10%
   padding 0
   margin 0
   color #ccc
