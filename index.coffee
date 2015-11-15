@@ -11,20 +11,18 @@ update: (output, domEl) ->
 
   # ME
   me = data.me.items[0];
-  inboxUnread = data.inboxUnread.items;
-  notificationsUnread = data.notificationsUnread.items;
-  $domEl.append("<div><span class='name'>me</span> <a href='#{me.link}'>#{me.display_name}</a> (i:#{inboxUnread.length}) (n:#{notificationsUnread.length})</div>")
-  $domEl.append("<div><span class='name'>reputation</span> #{me.reputation} (d:#{me.reputation_change_day}, w:#{me.reputation_change_week}, m:#{me.reputation_change_month}, q:#{me.reputation_change_quarter}, y:#{me.reputation_change_year})</div>")
-  $domEl.append("<div><span class='name'>posts</span> q:#{me.question_count}, a:#{me.answer_count}</div>")
-  $domEl.append("<div><span class='name'>badges</span> g:#{me.badge_counts.gold}, s:#{me.badge_counts.silver}, b:#{me.badge_counts.bronze}</div>")
+  $domEl.append("<div align='center'>[ #{data.site}: <a class='name' href='#{me.link}'>#{me.display_name}</a> ]</div><br />")
+  $domEl.append("<div>[ <span class='name'>reputation</span>: #{me.reputation} (d:#{me.reputation_change_day}, w:#{me.reputation_change_week}, m:#{me.reputation_change_month}, q:#{me.reputation_change_quarter}, y:#{me.reputation_change_year}) ]</div>")
+  $domEl.append("<div>[ <span class='name'>posts</span>: q:#{me.question_count}, a:#{me.answer_count} ]</div>")
+  $domEl.append("<div>[ <span class='name'>badges</span>: g:#{me.badge_counts.gold}, s:#{me.badge_counts.silver}, b:#{me.badge_counts.bronze} ]</div>")
 
   # LAST BADGE
   lastBadge = data.lastBadge.items[0]
-  $domEl.append("<div><span class='name'>last badge</span> <a href='#{lastBadge.link}'>#{lastBadge.name.toLowerCase()} (#{lastBadge.rank.substring(0, 1)})</a></div>")
+  $domEl.append("<div>[ <span class='name'>last badge</span>: <a href='#{lastBadge.link}'>#{lastBadge.name.toLowerCase()} (#{lastBadge.rank.substring(0, 1)})</a> ]</div><br />")
 
   # REPUTATION
   reputationItems = data.reputation.items.slice(0, 3)
-  $domEl.append("<table><tr class='item'><th colspan='5'>reputation history</th></tr>")
+  $domEl.append("<div>[ <span class='name'>reputation history</span> ]</div><table>")
 
   for item in reputationItems
     $domEl.append @renderItem(item)
@@ -48,26 +46,25 @@ renderItem: (item) ->
 
   """
     <tr class='entry item'>
-      <td width='50'>#{date.getDate()}.#{date.getMonth()}.</td>
-      <td width='150'>#{item.vote_type}</td>
-      <td width='25'>#{item.post_type.substring(0, 1)}:</td>
-      <td width='250'><a href='#{item.link}'>#{title.toLowerCase()}</a></td>
+      <td width='50'>#{date.getDate()}.#{date.getMonth()}.&nbsp;</td>
+      <td width='150'>#{item.vote_type}&nbsp;</td>
+      <td width='25'>#{item.post_type.substring(0, 1)}:&nbsp;</td>
+      <td width='250'><a href='#{item.link}'>#{title.toLowerCase()}</a>&nbsp;</td>
       <td width='25' class='right'>#{reputationChange}</td>
     </tr>
   """
 
 style: """
   right 0%
-  bottom 10%
+  bottom 0%
   padding 0
   margin 0
   color #ccc
   font-family Menlo
   font-size 1em
-  width 500px
   background-color rgba(0, 0, 0, 0.5) 
 
-  span.name, th
+  .name
     font-weight bold
     color lime
 
