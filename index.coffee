@@ -46,7 +46,7 @@ renderItem: (item) ->
 
   """
     <tr class='entry item'>
-      <td width='50'>#{date.getDate()}.#{date.getMonth()}.&nbsp;</td>
+      <td width='50'>#{date.getDate()}.#{date.getMonth()+1}.&nbsp;</td>
       <td width='150'>#{item.vote_type}&nbsp;</td>
       <td width='25'>#{item.post_type.substring(0, 1)}:&nbsp;</td>
       <td width='250'><a href='#{item.link}'>#{title.toLowerCase()}</a>&nbsp;</td>
