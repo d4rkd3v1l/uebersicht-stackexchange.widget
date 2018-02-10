@@ -6,4 +6,4 @@
 
 # Configuration
 site="stackoverflow"
-token="yHp4GrEgFAhoaza9gtyb*A))"
+token="your-token-here"

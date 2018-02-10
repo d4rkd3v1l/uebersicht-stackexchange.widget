@@ -8,15 +8,14 @@ meURI="me?filter=!)69PCU5SMBXFAHf.D2hsloXb*w5W"
 reputationURI="me/reputation?filter=!)sYX)Ef.6_GJKms(IoAV"
 lastBadgeURI="me/badges?order=desc&sort=awarded&pagesize=1"
 
-function GetResponse
-{
+function getResponse {
 	echo $(curl -sb -H --compressed "$baseURI/$1&site=$site&key=$key&access_token=$token")
 }
 
 response="{
 	\"site\":\"$site\",
-	\"me\":$(GetResponse $meURI),
-	\"reputation\":$(GetResponse $reputationURI),
-	\"lastBadge\":$(GetResponse $lastBadgeURI)
+	\"me\":$(getResponse $meURI),
+	\"reputation\":$(getResponse $reputationURI),
+	\"lastBadge\":$(getResponse $lastBadgeURI)
 }"
 echo "$response"
